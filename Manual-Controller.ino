@@ -8,8 +8,9 @@
 
 ESP8266WebServer server;
 //uint8_t pin_led = 2;
-char* ssid = "Rede-Teste";
-char* password = "123456789";
+char* ssid = "Auto-Engines-Wifi";
+char* password = "h62e7a89";
+String comandoArm = "";
 
 void setup() {
   //Configura os pinos
@@ -54,8 +55,12 @@ void controller(){
   StaticJsonBuffer<200> jBuffer;
   JsonObject& jObject = jBuffer.parseObject(data);
   String comando = jObject["command"];
-  interpreter(comando);
-  server.send(200,"text/plain","OC"); 
+  if(comando != ""){
+    server.send(200,"text/plain","OC");
+    comandoArm = comando;
+  }
+  interpreter(comandoArm);
+  
 }
 
 void interpreter(String comando){
@@ -90,9 +95,6 @@ void interpreter(String comando){
   if(comando == "space"){
     disableAll();
   }
-  
-  delay(pulse_time);
-  disableAll();
 }
 
 void disableAll(){
