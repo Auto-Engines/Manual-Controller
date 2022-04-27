@@ -6,11 +6,11 @@ http = httplib2.Http()
 pygame.init()
 
 def sendData(key):
-    url_json = 'http://192.168.15.33/controller'   
+    url_json = 'http://192.168.51.198/controller'   
     data = {'command': key}
     headers={'Content-Type': 'application/json; charset=UTF-8'}
     response, content = http.request(url_json, 'POST', headers=headers, body=json.dumps(data))
-    return (response,content)
+    return (key)
 
 def main():
     clock = pygame.time.Clock()
@@ -25,45 +25,27 @@ def main():
             '''if event.type == pygame.JOYAXISMOTION:
                 print(event)'''
             if event.type == pygame.JOYHATMOTION:
+                print(event)
                 frenteTras = event.value[1]
                 dirEsq = event.value[0]
 
-                while (frenteTras > 0):
-                    #Frente
-                    for event in pygame.event.get():
-                        if event.type == pygame.JOYHATMOTION:
-                            if(event.value[1] == 0):
-                                frenteTras = 0
-                                
-                    print("Frente, Resposta: \n", sendData("w"))
 
-                while (frenteTras < 0):
-                    #Ré
-                    for event in pygame.event.get():
-                        if event.type == pygame.JOYHATMOTION:
-                            if(event.value[1] == 0):
-                                frenteTras = 0
-                                
-                    print("Ré, Resposta: \n", sendData("s"))
-                    
+                if frenteTras == 1:
+                    print(sendData("w"))
+                if frenteTras == -1:
+                    print(sendData("s"))
+                
 
-                while (dirEsq > 0):
-                    #Dir
-                    for event in pygame.event.get():
-                        if event.type == pygame.JOYHATMOTION:
-                            if(event.value[0] == 0):
-                                dirEsq = 0
-                                
-                    print("Direita, Resposta: \n", sendData("d"))
+                if dirEsq == 1:
+                    print(sendData("d"))
+                if dirEsq == -1:
+                    print(sendData("a"))
 
-                while (dirEsq < 0):
-                    #Esq
-                    for event in pygame.event.get():
-                        if event.type == pygame.JOYHATMOTION:
-                            if(event.value[0] == 0):
-                                dirEsq = 0
-                                
-                    print("Esquerda, Resposta: \n", sendData("a"))
+                if frenteTras == 0 and dirEsq==0:
+                    print(sendData("space"))
+
+                #print(frenteTras)
+
 
                 
             elif event.type == pygame.JOYBUTTONDOWN:
