@@ -88,7 +88,7 @@ void interpreter(String comando){
     digitalWrite(PINO_IN4, LOW);
   }
   if(comando == "space"){
-    deactivator();
+    disableAll();
   }
   
   delay(pulse_time);
