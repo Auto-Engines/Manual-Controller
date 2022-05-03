@@ -13,10 +13,10 @@ def sendData(key):
     
 while True:
     if keyboard.is_pressed("w"):
-        print(sendData("w"))
+        print(sendData("1"))
     if keyboard.is_pressed("s"):
-        print(sendData("s"))
+        print(sendData("2"))
     if keyboard.is_pressed("a"):
-        print(sendData("a"))
+        print(sendData("3"))
     if keyboard.is_pressed("d"):
-        print(sendData("d"))
+        print(sendData("4"))

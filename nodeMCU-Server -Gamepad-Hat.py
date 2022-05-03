@@ -6,7 +6,7 @@ http = httplib2.Http()
 pygame.init()
 
 def sendData(key):
-    url_json = 'http://192.168.51.198/controller'   
+    url_json = 'http://192.168.15.33/controller'   
     data = {'command': key}
     headers={'Content-Type': 'application/json; charset=UTF-8'}
     response, content = http.request(url_json, 'POST', headers=headers, body=json.dumps(data))
@@ -31,18 +31,18 @@ def main():
 
 
                 if frenteTras == 1:
-                    print(sendData("w"))
+                    print(sendData("2"))
                 if frenteTras == -1:
-                    print(sendData("s"))
+                    print(sendData("1"))
                 
 
                 if dirEsq == 1:
-                    print(sendData("d"))
+                    print(sendData("4"))
                 if dirEsq == -1:
-                    print(sendData("a"))
+                    print(sendData("3"))
 
                 if frenteTras == 0 and dirEsq==0:
-                    print(sendData("space"))
+                    print(sendData("0"))
 
                 #print(frenteTras)
 
@@ -53,6 +53,10 @@ def main():
                 print("Botão: ", button)
                 if(button == 8):
                     running = False
+                if(button == 4):
+                    print(sendData("5"))
+                if(button == 5):
+                    print(sendData("6"))
  
         #clock.tick(20)
  
